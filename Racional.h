@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Real.h"
+#include <typeinfo>
 
 using namespace std;
 
@@ -21,15 +22,9 @@ public:
     int getDenominador();
     void setDenominador(int);
 
-    string sumaRacional(Real*);
-    string restaRacional(Real*);
-    string multRacional(Real*);
-    string divRacional(Real*);     
-
-    string sumaRadical(Real*);
-    string restaRadical(Real*);
-    string multRadical(Real*);
-    string divRadical(Real*);
-
+    string suma(Real*);
+    string resta(Real*);
+    string mult(Real*);
+    string div(Real*);     
 };
 #endif

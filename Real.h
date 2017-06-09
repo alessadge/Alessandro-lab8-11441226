@@ -12,14 +12,9 @@ protected:
 public:
     Real();
      
-    virtual string sumaRacional(Real*)=0;
-    virtual string restaRacional(Real*)=0;
-    virtual string multRacional(Real*)=0;
-    virtual string divRacional(Real*)=0;     
-
-    virtual string sumaRadical(Real*)=0;
-    virtual string restaRadical(Real*)=0;
-    virtual string multRadical(Real*)=0;
-    virtual string divRadical(Real*)=0;
+    virtual string suma(Real*)=0;
+    virtual string resta(Real*)=0;
+    virtual string mult(Real*)=0;
+    virtual string div(Real*)=0;     
 };
 #endif

@@ -1,4 +1,6 @@
 #include "Racional.h"
+#include "Radical.h"
+#include <typeinfo>
 
 Racional::Racional(int numerador,int denominador){
 	this->numerador=numerador;
@@ -20,28 +22,37 @@ int Racional::getDenominador(){
 	return denominador;
 }
 
-string Racional::sumaRacional(Real*){
+string Racional::suma(Real*num){
+	string retValue;
+	int denominador_temp,numerador_temp;
+	if(typeid(num)==typeid(Racional)){
 
+	}
+	if(typeid(num)==typeid(Radical)){
+
+	}
+}	
+string Racional::resta(Real*num){
+	if(typeid(num)==typeid(Racional)){
+
+	}
+	if(typeid(num)==typeid(Radical)){
+
+	}
 }
-string Racional::restaRacional(Real*){
+string Racional::mult(Real*num){
+	if(typeid(num)==typeid(Racional)){
 
+	}
+	if(typeid(num)==typeid(Radical)){
+
+	}
 }
-string Racional::multRacional(Real*){
+string Racional::div(Real*num){
+	if(typeid(num)==typeid(Racional)){
 
-}
-string Racional::divRacional(Real*){
+	}
+	if(typeid(num)==typeid(Radical)){
 
+	}
 }     
-//---------------
-string Racional::sumaRadical(Real*){
-
-}
-string Racional::restaRadical(Real*){
-
-}
-string Racional::multRadical(Real*){
-
-}
-string Racional::divRadical(Real*){
-
-}
