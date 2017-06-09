@@ -7,7 +7,8 @@ Radical::Radical(int coeficiente,int indice,int radicando){
 }
 Radical::Radical(){
 
-}void Radical::setCoeficiente(int coeficiente){
+}
+void Radical::setCoeficiente(int coeficiente){
    this-> coeficiente=coeficiente;
 }
 int Radical::getCoeficiente(){
@@ -24,4 +25,30 @@ void Radical::setRadicando(int radicando){
 }
 int Radical::getRadicando(){
    return radicando;
+}
+
+string Radical::sumaRacional(Real*){
+
+}
+string Radical::restaRacional(Real*){
+
+}
+string Radical::multRacional(Real*){
+
+}
+string Radical::divRacional(Real*){
+
+}     
+//---------------
+string Radical::sumaRadical(Real*){
+
+}
+string Radical::restaRadical(Real*){
+
+}
+string Radical::multRadical(Real*){
+
+}
+string Radical::divRadical(Real*){
+	
 }
