@@ -6,6 +6,7 @@
 #include "Racional.h"
 #include <typeinfo>
 #include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ int main(){
         cout<<"1.) Banco de numeros "<<endl;
         cout<<"2.) Calculadora "<<endl;
         cout<<"3.) Listar"<<endl;
-        cout<<"4.) Guardar "<<endl;
+        cout<<"4.) Guardar en texto"<<endl;
         cout<<"5.) Salir "<<endl;
         cin>>opcion;
         if(opcion==1){
@@ -395,7 +396,19 @@ int main(){
         }//fin opcion
 
         if(opcion==3){
-            
+                ofstream archivo;
+                string ruta="Nombre.txt";
+                stringstream ss;
+                ss<<"Operaciones.txt";
+                ruta=ss.str();
+                archivo.open(ruta.c_str(),ios::app);
+            for (int i = 0; i < operaciones.size(); ++i)
+            {
+                
+                archivo<<operaciones[i]<<endl;
+                
+            }
+            archivo.close();
         }//fin opcion
 
     }//fin while
