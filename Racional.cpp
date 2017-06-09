@@ -23,36 +23,62 @@ int Racional::getDenominador(){
 }
 
 string Racional::suma(Real*num){
-	string retValue;
+	string retValue="";
 	int denominador_temp,numerador_temp;
 	if(typeid(num)==typeid(Racional)){
-
+		Racional* racional = dynamic_cast<Racional*>(num);
+		if(denominador==racional->getDenominador()){
+			denominador_temp=denominador;
+			numerador_temp=numerador+racional->getNumerador();
+			retValue+=numerador_temp+"/"+denominador_temp;
+		}
 	}
 	if(typeid(num)==typeid(Radical)){
 
 	}
+	return retValue;
 }	
 string Racional::resta(Real*num){
+	string retValue="";
+	int denominador_temp,numerador_temp;
 	if(typeid(num)==typeid(Racional)){
-
+		Racional* racional = dynamic_cast<Racional*>(num);
+		if(denominador==racional->getDenominador()){
+			denominador_temp=denominador;
+			numerador_temp=numerador-racional->getNumerador();
+			retValue+=numerador_temp+"/"+denominador_temp;
+		}
 	}
 	if(typeid(num)==typeid(Radical)){
 
 	}
+	return retValue;
 }
 string Racional::mult(Real*num){
+	string retValue="";
+	int denominador_temp,numerador_temp;
 	if(typeid(num)==typeid(Racional)){
-
+		Racional* racional = dynamic_cast<Racional*>(num);
+		denominador_temp=denominador*racional->getDenominador();
+		numerador_temp=numerador*racional->getNumerador();
+		retValue+=numerador_temp+"/"+denominador_temp;		
 	}
 	if(typeid(num)==typeid(Radical)){
 
 	}
+	return retValue;
 }
 string Racional::div(Real*num){
+	string retValue="";
+	int denominador_temp,numerador_temp;
 	if(typeid(num)==typeid(Racional)){
-
+		Racional* racional = dynamic_cast<Racional*>(num);
+		denominador_temp=denominador*racional->getNumerador();
+		numerador_temp=numerador*racional->getDenominador();
+		retValue+=numerador_temp+"/"+denominador_temp;		
 	}
 	if(typeid(num)==typeid(Radical)){
 
 	}
+return retValue;
 }     
