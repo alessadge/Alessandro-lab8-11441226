@@ -5,6 +5,7 @@
 #include "Radical.h"
 #include "Racional.h"
 #include <typeinfo>
+#include <sstream>
 
 using namespace std;
 
@@ -41,8 +42,8 @@ int main(){
                     cout<<"Ingrese un numerador"<<endl;
                     cin>>numerador;
 
-                    racional.setDenominador(denominador);
-                    racional.setNumerador(numerador);
+                    reinterpret_cast<Racional*>(racional)->setDenominador(denominador);
+                    reinterpret_cast<Racional*>(racional)->setNumerador(numerador);
                     reales.push_back(racional);
                  }//fin opcion1 1
 
@@ -57,14 +58,14 @@ int main(){
                     cout<<"Ingrese un denominador"<<endl;
                     cin>>radicando;
 
-                    radical.setCoeficiente(coeficiente);
-                    radical.setIndice(indice);
-                    radical.setRadicando(radicando);
-                    reales.push_back(coeficiente, indice, radicando);
+                    reinterpret_cast<Radical*>(radical)->setCoeficiente(coeficiente);
+                    reinterpret_cast<Radical*>(radical)->setIndice(indice);
+                    reinterpret_cast<Radical*>(radical)->setRadicando(radicando);
+                    reales.push_back(radical);
                  }//fin opcion1 2
 
                 if(opcion1==3){
-                    exit(0);
+                    
                 }
 
 
@@ -79,31 +80,33 @@ int main(){
           {
               if(typeid(reales[i])==typeid(Racional)){
                    //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
-                   cout<<i<<".) "<<reales[i]->getNumerador()<<"/"<<reales[i]->getDenominador()<<endl;
+                   cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
                     
               }
               if(typeid(reales[i])==typeid(Radical)){
                    //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
-                   cout<<i<<".) "<<reales[i]->getCoeficiente()<<"("<<reales[i]->getRadicando()<<")"<<"^1/"<<reales[i]->getIndice()<<endl;
+                   cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
               }
 
           }//fin for
-
+            stringstream acumu;
             int pos;
             cout<<endl;
             cout<<"Ingrese posicion del vector:"<<endl;
             cin>>pos;
-            Real* numReal;
-            numReal=reales[pos];
+            Real* realRaiz;
+            realRaiz=reales[pos];
+
             if(typeid(reales[pos])==typeid(Racional)){
-                acumulador+= reales[pos]->getNumerador()+"/"+reales[pos]->getDenominador()
+                acumu << reinterpret_cast<Racional*>(realRaiz)->getNumerador()<<"/"<<   reinterpret_cast<Racional*>(realRaiz)->getDenominador();
                 
               }
             if(typeid(reales[pos])==typeid(Radical)){
-                acumulador+= reales[pos]->getCoeficiente()+"("+reales[pos]->getRadicando()+")"+"^1/"+reales[pos]->getIndice();
+                acumu <<  reinterpret_cast<Radical*>(realRaiz)->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(realRaiz)->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(realRaiz)->getIndice();
                    
               }
+
                  int opcionCalcu;
                  cout<<"BANCO DE NUMEROS"<<endl;
                  cout<<"1.) Sumar"<<endl;
@@ -113,7 +116,7 @@ int main(){
                  cin>>opcionCalcu;
 
                  if(opcionCalcu==1){
-                    acumulador=acumulador+"+";
+                    acumu<<"+";
                     
                         int opcionU;
                         cout<<"Que desea?:"<<endl;
@@ -126,59 +129,271 @@ int main(){
                             {
                                  if(typeid(reales[i])==typeid(Racional)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
-                                     cout<<i<<".) "<<reales[i]->getNumerador()<<"/"<<reales[i]->getDenominador()<<endl;
+                                     cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
                     
                                  }
                                 if(typeid(reales[i])==typeid(Radical)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
-                                     cout<<i<<".) "<<reales[i]->getCoeficiente()<<"("<<reales[i]->getRadicando()<<")"<<"^1/"<<reales[i]->getIndice()<<endl;
+                                     cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
                                  }
+
                                 int pos1;
                                 cout<<endl;
                                 cout<<"Ingrese posicion del vector:"<<endl;
                                 cin>>pos1;
+
                                 if(typeid(reales[pos1])==typeid(Racional)){
-                                    acumulador+= reales[pos1]->getNumerador()+"/"+reales[pos1]->getDenominador()
+                                    acumu<< reinterpret_cast<Racional*>(reales[pos])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[pos])->getDenominador();
                 
                                 }
                                 if(typeid(reales[pos1])==typeid(Radical)){
-                                    acumulador+= reales[pos1]->getCoeficiente()+"("+reales[pos1]->getRadicando()+")"+"^1/"+reales[pos1]->getIndice();
+                                    acumu<< reinterpret_cast<Radical*>(reales[pos])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[pos])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[pos])->getIndice();
                    
                                 }
                                 string resultado;
                                 resultado="";
-                                if(typeid(reales[realRaiz])==typeid(Racional)){
-                                    resultado= "=" +  realRaiz->suma(reales[pos1]);
-                                    acumulador+=resultado;              
+                                if(typeid(realRaiz)==typeid(Racional)){
+                                    resultado= "=" +  reinterpret_cast<Racional*>(realRaiz)->suma(reales[pos1]);
+                                    acumu<<resultado;              
                                  }
-                                if(typeid(reales[realRaiz])==typeid(Radical)){
-                                    resultado= "=" +  realRaiz->suma(reales[pos1]);
-                                    acumulador+=resultado; 
+                                if(typeid(realRaiz)==typeid(Radical)){
+                                    resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->suma(reales[pos1]);
+                                    acumu<<resultado; 
                                  }
                             }
+                            operaciones.push_back(acumu.str());
 
                         }
+                    if(opcionU==2){
+                        double numero;
+                        cout<<"Ingrese un numero entero o decimal: "<<endl;
+                        cin>>numero;
+
+                        acumu<<numero;
+
+                        string resultado;
+                        string resultadoFinal;
+                        resultadoFinal= "=";
+                        //resultado = realRaiz + numero;
+                          
+                        resultadoFinal=resultadoFinal+resultado;
+                        acumu<<resultadoFinal;
+                        operaciones.push_back(acumu.str());
+
+                     }
                     
-                 }//fin opcionCalcu
-                 if(opcionU==2){
-                    double numero;
-                    cout<<"Ingrese un numero entero o decimal: "<<endl;
-                    cin>>numero;
-
-                    acumulador+=""+numero;
-
-                    string resultado;
-                    string resultadoFinal;
-                    resultadoFinal= "=";
-                    resultado = numReal + numero;
+                 }//fin opcionCalcu sumar
+                 
+                if(opcionCalcu==2){
+                    acumu<<"+";
                     
-                    resultadoFinal=resultadoFinal+resultado;
+                        int opcionU;
+                        cout<<"Que desea?:"<<endl;
+                        cout<<"1.) Escoger un numero del banco"<<endl;
+                        cout<<"2.) Ingresar numero real o decimal"<<endl;
+                        cin>>opcionU;
 
-                 }
+                        if(opcionU==1){
+                            for (int i = 0; i < reales.size(); ++i)//imprime el vector
+                            {
+                                 if(typeid(reales[i])==typeid(Racional)){
+                                      //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                                     cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
+                    
+                                 }
+                                if(typeid(reales[i])==typeid(Radical)){
+                                      //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                                     cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
+                    
+                                 }
 
+                                int pos1;
+                                cout<<endl;
+                                cout<<"Ingrese posicion del vector:"<<endl;
+                                cin>>pos1;
+
+                                if(typeid(reales[pos1])==typeid(Racional)){
+                                    acumu<< reinterpret_cast<Racional*>(reales[pos])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[pos])->getDenominador();
+                
+                                }
+                                if(typeid(reales[pos1])==typeid(Radical)){
+                                    acumu<< reinterpret_cast<Radical*>(reales[pos])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[pos])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[pos])->getIndice();
+                   
+                                }
+                                string resultado;
+                                resultado="";
+                                if(typeid(realRaiz)==typeid(Racional)){
+                                    resultado= "=" +  reinterpret_cast<Racional*>(realRaiz)->resta(reales[pos1]);
+                                    acumu<<resultado;              
+                                 }
+                                if(typeid(realRaiz)==typeid(Radical)){
+                                    resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->resta(reales[pos1]);
+                                    acumu<<resultado; 
+                                 }
+                            }
+                            operaciones.push_back(acumu.str());
+
+                        }
+                    if(opcionU==2){
+                        double numero;
+                        cout<<"Ingrese un numero entero o decimal: "<<endl;
+                        cin>>numero;
+
+                        acumu<<numero;
+
+                        string resultado;
+                        string resultadoFinal;
+                        resultadoFinal= "=";
+                        //resultado = realRaiz - numero;
+                          
+                        resultadoFinal=resultadoFinal+resultado;
+                        acumu<<resultadoFinal;
+                        operaciones.push_back(acumu.str());
+
+                     }
+                }//fin opcionCalcu resta
+
+                if(opcionCalcu==3){
+                    acumu<<"+";
+                    
+                        int opcionU;
+                        cout<<"Que desea?:"<<endl;
+                        cout<<"1.) Escoger un numero del banco"<<endl;
+                        cout<<"2.) Ingresar numero real o decimal"<<endl;
+                        cin>>opcionU;
+
+                        if(opcionU==1){
+                            for (int i = 0; i < reales.size(); ++i)//imprime el vector
+                            {
+                                 if(typeid(reales[i])==typeid(Racional)){
+                                      //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                                     cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
+                    
+                                 }
+                                if(typeid(reales[i])==typeid(Radical)){
+                                      //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                                     cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
+                    
+                                 }
+
+                                int pos1;
+                                cout<<endl;
+                                cout<<"Ingrese posicion del vector:"<<endl;
+                                cin>>pos1;
+
+                                if(typeid(reales[pos1])==typeid(Racional)){
+                                    acumu<< reinterpret_cast<Racional*>(reales[pos])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[pos])->getDenominador();
+                
+                                }
+                                if(typeid(reales[pos1])==typeid(Radical)){
+                                    acumu<< reinterpret_cast<Radical*>(reales[pos])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[pos])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[pos])->getIndice();
+                   
+                                }
+                                string resultado;
+                                resultado="";
+                                if(typeid(realRaiz)==typeid(Racional)){
+                                    resultado= "=" +  reinterpret_cast<Racional*>(realRaiz)->mult(reales[pos1]);
+                                    acumu<<resultado;              
+                                 }
+                                if(typeid(realRaiz)==typeid(Radical)){
+                                    resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->mult(reales[pos1]);
+                                    acumu<<resultado; 
+                                 }
+                            }
+                            operaciones.push_back(acumu.str());
+
+                        }
+                    if(opcionU==2){
+                        double numero;
+                        cout<<"Ingrese un numero entero o decimal: "<<endl;
+                        cin>>numero;
+
+                        acumu<<numero;
+
+                        string resultado;
+                        string resultadoFinal;
+                        resultadoFinal= "=";
+                        //resultado = realRaiz * numero;
+                          
+                        resultadoFinal=resultadoFinal+resultado;
+                        acumu<<resultadoFinal;
+                        operaciones.push_back(acumu.str());
+
+                     }
+                }//multiplicacion opcionCalcu
+
+                if(opcionCalcu==4){
+                    acumu<<"+";
+                    
+                        int opcionU;
+                        cout<<"Que desea?:"<<endl;
+                        cout<<"1.) Escoger un numero del banco"<<endl;
+                        cout<<"2.) Ingresar numero real o decimal"<<endl;
+                        cin>>opcionU;
+
+                        if(opcionU==1){
+                            for (int i = 0; i < reales.size(); ++i)//imprime el vector
+                            {
+                                 if(typeid(reales[i])==typeid(Racional)){
+                                      //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                                     cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
+                    
+                                 }
+                                if(typeid(reales[i])==typeid(Radical)){
+                                      //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                                     cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
+                    
+                                 }
+
+                                int pos1;
+                                cout<<endl;
+                                cout<<"Ingrese posicion del vector:"<<endl;
+                                cin>>pos1;
+
+                                if(typeid(reales[pos1])==typeid(Racional)){
+                                    acumu<< reinterpret_cast<Racional*>(reales[pos])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[pos])->getDenominador();
+                
+                                }
+                                if(typeid(reales[pos1])==typeid(Radical)){
+                                    acumu<< reinterpret_cast<Radical*>(reales[pos])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[pos])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[pos])->getIndice();
+                   
+                                }
+                                string resultado;
+                                resultado="";
+                                if(typeid(realRaiz)==typeid(Racional)){
+                                    resultado= "=" +  reinterpret_cast<Racional*>(realRaiz)->div(reales[pos1]);
+                                    acumu<<resultado;              
+                                 }
+                                if(typeid(realRaiz)==typeid(Radical)){
+                                    resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->div(reales[pos1]);
+                                    acumu<<resultado; 
+                                 }
+                            }
+                            operaciones.push_back(acumu.str());
+
+                        }
+                    if(opcionU==2){
+                        double numero;
+                        cout<<"Ingrese un numero entero o decimal: "<<endl;
+                        cin>>numero;
+
+                        acumu<<numero;
+
+                        string resultado;
+                        string resultadoFinal;
+                        resultadoFinal= "=";
+                        //resultado = realRaiz / numero;
+                          
+                        resultadoFinal=resultadoFinal+resultado;
+                        acumu<<resultadoFinal;
+                        operaciones.push_back(acumu.str());
+
+                     }
+                }//division opcionCalcu
 
         }//fin opcion
+
         if(opcion==3){
             
         }//fin opcion
