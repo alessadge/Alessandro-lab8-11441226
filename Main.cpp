@@ -205,7 +205,7 @@ int main(){
                  }//fin opcionCalcu sumar
                  
                 if(opcionCalcu==2){
-                    acumu<<"+";
+                    acumu<<"-";
                     
                         int opcionU;
                         cout<<"Que desea?:"<<endl;
@@ -283,7 +283,7 @@ int main(){
                 }//fin opcionCalcu resta
 
                 if(opcionCalcu==3){
-                    acumu<<"+";
+                    acumu<<"*";
                     
                         int opcionU;
                         cout<<"Que desea?:"<<endl;
@@ -361,7 +361,7 @@ int main(){
                 }//multiplicacion opcionCalcu
 
                 if(opcionCalcu==4){
-                    acumu<<"+";
+                    acumu<<"/";
                     
                         int opcionU;
                         cout<<"Que desea?:"<<endl;
@@ -426,7 +426,7 @@ int main(){
                     
                                  }
                         if(typeid(*realRaiz)==typeid(Radical)){
-                              resultado = *(reinterpret_cast<Radical*>(realRaiz)) / numero;   
+                              resultado = *(reinterpret_cast<Radical*>(realRaiz))  numero;   
                                     
         
                                  }
