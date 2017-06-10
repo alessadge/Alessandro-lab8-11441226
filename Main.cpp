@@ -226,6 +226,7 @@ int main(){
                                      cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
                                  }
+                            }
 
                                 int pos1;
                                 cout<<endl;
@@ -250,7 +251,7 @@ int main(){
                                     resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->resta(reales[pos1]);
                                     acumu<<resultado; 
                                  }
-                            }
+                            
                             operaciones.push_back(acumu.str());
 
                         }
@@ -304,7 +305,7 @@ int main(){
                                      cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
                                  }
-
+                            }
                                 int pos1;
                                 cout<<endl;
                                 cout<<"Ingrese posicion del vector:"<<endl;
@@ -328,7 +329,7 @@ int main(){
                                     resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->mult(reales[pos1]);
                                     acumu<<resultado; 
                                  }
-                            }
+                            
                             operaciones.push_back(acumu.str());
 
                         }
@@ -382,7 +383,7 @@ int main(){
                                      cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
                                  }
-
+                            }
                                 int pos1;
                                 cout<<endl;
                                 cout<<"Ingrese posicion del vector:"<<endl;
@@ -406,7 +407,7 @@ int main(){
                                     resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->div(reales[pos1]);
                                     acumu<<resultado; 
                                  }
-                            }
+                            
                             operaciones.push_back(acumu.str());
 
                         }
@@ -426,7 +427,7 @@ int main(){
                     
                                  }
                         if(typeid(*realRaiz)==typeid(Radical)){
-                              resultado = *(reinterpret_cast<Radical*>(realRaiz))  numero;   
+                              resultado = *(reinterpret_cast<Radical*>(realRaiz))  /numero;   
                                     
         
                                  }
