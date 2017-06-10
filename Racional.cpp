@@ -34,8 +34,7 @@ string Racional::suma(Real*num){
 		}else{
 			denominador_temp = denominador * racional->getDenominador();
 			numerador_temp = (denominador*racional->getNumerador())
-							+(numerador*racional->getDenominador());
-
+			+(numerador*racional->getDenominador());
 			retValue = numerador_temp + "/" + denominador_temp;
 		}
 	}
@@ -50,8 +49,14 @@ string Racional::suma(Real*num){
 				denominador_temp=denominador;
 				retValue+=numerador_temp+"/"+denominador_temp;
 			}else{
-				//numerador_temp+=numerador+"+"+radical->getCoeficiente+"("+
-
+				retValue+=numerador+"/";
+				retValue+=denominador+"+"+radical->getCoeficiente();
+				retValue+="(";
+				retValue+=radical->getRadicando();
+				retValue+=")";
+				retValue+="^";
+				retValue+="(";
+				retValue+=1+"/"+radical->getIndice();
 			}
 		}	
 	}
@@ -66,10 +71,34 @@ string Racional::resta(Real*num){
 			denominador_temp=denominador;
 			numerador_temp=numerador-racional->getNumerador();
 			retValue+=numerador_temp+"/"+denominador_temp;
+		}else{
+			denominador_temp = denominador * racional->getDenominador();
+			numerador_temp = (denominador*racional->getNumerador())
+			-(numerador*racional->getDenominador());
+			retValue = numerador_temp + "/" + denominador_temp;
 		}
 	}
 	if(typeid(num)==typeid(Radical)){
-
+		int raiz;
+		if(denominador==1){
+			Radical* radical = dynamic_cast<Radical*>(num);
+			int raiz=radical->getRadicando()^(1/radical->getIndice());
+			double raiz2=radical->getRadicando()^(1/radical->getIndice());
+			if(raiz==raiz2){
+				numerador_temp=numerador-(raiz*radical->getCoeficiente());
+				denominador_temp=denominador;
+				retValue+=numerador_temp+"/"+denominador_temp;
+			}else{
+				retValue+=numerador+"/";
+				retValue+=denominador+"-"+radical->getCoeficiente();
+				retValue+="(";
+				retValue+=radical->getRadicando();
+				retValue+=")";
+				retValue+="^";
+				retValue+="(";
+				retValue+=1+"/"+radical->getIndice();
+			}
+		}
 	}
 	return retValue;
 }
@@ -83,7 +112,23 @@ string Racional::mult(Real*num){
 		retValue+=numerador_temp+"/"+denominador_temp;		
 	}
 	if(typeid(num)==typeid(Radical)){
-
+		Radical* radical = dynamic_cast<Radical*>(num);
+		int raiz=radical->getRadicando()^(1/radical->getIndice());
+		double raiz2=radical->getRadicando()^(1/radical->getIndice());
+		if(raiz==raiz2){
+			numerador_temp=numerador*(raiz*radical->getCoeficiente());
+			denominador_temp=denominador;
+			retValue+=numerador_temp+"/"+denominador_temp;
+		}else{
+			retValue+=numerador+"/";
+			retValue+=denominador+"*"+radical->getCoeficiente();
+			retValue+="(";
+			retValue+=radical->getRadicando();
+			retValue+=")";
+			retValue+="^";
+			retValue+="(";
+			retValue+=1+"/"+radical->getIndice();
+		}		
 	}
 	return retValue;
 }
@@ -97,7 +142,23 @@ string Racional::div(Real*num){
 		retValue+=numerador_temp+"/"+denominador_temp;		
 	}
 	if(typeid(num)==typeid(Radical)){
-
+		Radical* radical = dynamic_cast<Radical*>(num);
+		int raiz=radical->getRadicando()^(1/radical->getIndice());
+		double raiz2=radical->getRadicando()^(1/radical->getIndice());
+		if(raiz==raiz2){
+			numerador_temp=numerador;
+			denominador_temp=denominador*(raiz*radical->getCoeficiente());
+			retValue+=numerador_temp+"/"+denominador_temp;
+		}else{
+			retValue+=numerador+"/";
+			retValue+=denominador+"/"+radical->getCoeficiente();
+			retValue+="(";
+			retValue+=radical->getRadicando();
+			retValue+=")";
+			retValue+="^";
+			retValue+="(";
+			retValue+=1+"/"+radical->getIndice();
+		}
 	}
 	return retValue;
 }     
