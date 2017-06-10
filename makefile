@@ -1,4 +1,4 @@
-in: Main.o Real.o Racional.o Radical.o 
+Main: Main.o Real.o Racional.o Radical.o 
 	g++ Main.o Real.o Racional.o Radical.o -o Main
 
 Main.o: Main.cpp Real.h Racional.h Radical.h 
