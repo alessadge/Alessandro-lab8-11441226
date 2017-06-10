@@ -2,6 +2,7 @@
 #include <string>
 #include "Real.h"
 #include <typeinfo>
+#include <sstream>
 
 using namespace std;
 
@@ -29,6 +30,29 @@ public:
     string suma(Real*);
     string resta(Real*);
     string mult(Real*);
-    string div(Real*);     
+    string div(Real*);
+
+    string operator+(double num){
+        int den_temp,num_temp;
+
+    }
+    string operator-(double num){
+
+    }
+    string operator*(double num){
+
+    }
+    string operator/(double num){
+
+    } 
+
+    friend ostream& operator <<(ostream &escribir,Radical* doble){
+        stringstream ss;
+        string retValue;
+        
+        retValue=ss.str();
+        return escribir<<retValue;
+    }
+
 };
 #endif
