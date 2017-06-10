@@ -38,10 +38,11 @@ int main(){
                     int denominador, numerador;
                     Real* racional=new Racional();
 
-                    cout<<"Ingrese un denominador"<<endl;
-                    cin>>denominador;
+                    
                     cout<<"Ingrese un numerador"<<endl;
                     cin>>numerador;
+                    cout<<"Ingrese un denominador"<<endl;
+                    cin>>denominador;
 
                     reinterpret_cast<Racional*>(racional)->setDenominador(denominador);
                     reinterpret_cast<Racional*>(racional)->setNumerador(numerador);
@@ -79,12 +80,12 @@ int main(){
           acumulador="";
           for (int i = 0; i < reales.size(); ++i)//imprime el vector
           {
-              if(typeid(reales[i])==typeid(Racional)){
+              if(typeid(*reales[i])==typeid(Racional)){
                    //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                    cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
                     
               }
-              if(typeid(reales[i])==typeid(Radical)){
+              if(typeid(*reales[i])==typeid(Radical)){
                    //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                    cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
@@ -99,11 +100,11 @@ int main(){
             Real* realRaiz;
             realRaiz=reales[pos];
 
-            if(typeid(reales[pos])==typeid(Racional)){
+            if(typeid(*realRaiz)==typeid(Racional)){
                 acumu << reinterpret_cast<Racional*>(realRaiz)->getNumerador()<<"/"<<   reinterpret_cast<Racional*>(realRaiz)->getDenominador();
                 
               }
-            if(typeid(reales[pos])==typeid(Radical)){
+            if(typeid(*reales[pos])==typeid(Radical)){
                 acumu <<  reinterpret_cast<Radical*>(realRaiz)->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(realRaiz)->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(realRaiz)->getIndice();
                    
               }
@@ -128,41 +129,48 @@ int main(){
                         if(opcionU==1){
                             for (int i = 0; i < reales.size(); ++i)//imprime el vector
                             {
-                                 if(typeid(reales[i])==typeid(Racional)){
+                                 if(typeid(*reales[i])==typeid(Racional)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                                      cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
-                    
+                                     
                                  }
-                                if(typeid(reales[i])==typeid(Radical)){
+                                if(typeid(*reales[i])==typeid(Radical)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                                      cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
                                  }
-
+                            }
                                 int pos1;
                                 cout<<endl;
                                 cout<<"Ingrese posicion del vector:"<<endl;
                                 cin>>pos1;
 
-                                if(typeid(reales[pos1])==typeid(Racional)){
+                                if(typeid(*reales[pos1])==typeid(Racional)){
                                     acumu<< reinterpret_cast<Racional*>(reales[pos])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[pos])->getDenominador();
                 
                                 }
-                                if(typeid(reales[pos1])==typeid(Radical)){
+                                if(typeid(*reales[pos1])==typeid(Radical)){
                                     acumu<< reinterpret_cast<Radical*>(reales[pos])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[pos])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[pos])->getIndice();
                    
                                 }
                                 string resultado;
                                 resultado="";
-                                if(typeid(realRaiz)==typeid(Racional)){
-                                    resultado= "=" +  reinterpret_cast<Racional*>(realRaiz)->suma(reales[pos1]);
+
+                                if(typeid(*realRaiz)==typeid(Racional)){
+                                    resultado= "="; 
+                                    string resultado1;
+                                    resultado1=realRaiz->suma(reales[pos1]);
+                                    resultado=resultado+resultado1;
                                     acumu<<resultado;              
                                  }
-                                if(typeid(realRaiz)==typeid(Radical)){
-                                    resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->suma(reales[pos1]);
+                                if(typeid(*realRaiz)==typeid(Radical)){
+                                    resultado= "=";
+                                    string resultado1;
+                                    resultado1=realRaiz->suma(reales[pos1]);
+                                    resultado=resultado+resultado1;
                                     acumu<<resultado; 
                                  }
-                            }
+                            
                             operaciones.push_back(acumu.str());
 
                         }
@@ -198,12 +206,12 @@ int main(){
                         if(opcionU==1){
                             for (int i = 0; i < reales.size(); ++i)//imprime el vector
                             {
-                                 if(typeid(reales[i])==typeid(Racional)){
+                                 if(typeid(*reales[i])==typeid(Racional)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                                      cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
                     
                                  }
-                                if(typeid(reales[i])==typeid(Radical)){
+                                if(typeid(*reales[i])==typeid(Radical)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                                      cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
@@ -214,11 +222,11 @@ int main(){
                                 cout<<"Ingrese posicion del vector:"<<endl;
                                 cin>>pos1;
 
-                                if(typeid(reales[pos1])==typeid(Racional)){
+                                if(typeid(*reales[pos1])==typeid(Racional)){
                                     acumu<< reinterpret_cast<Racional*>(reales[pos])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[pos])->getDenominador();
                 
                                 }
-                                if(typeid(reales[pos1])==typeid(Radical)){
+                                if(typeid(*reales[pos1])==typeid(Radical)){
                                     acumu<< reinterpret_cast<Radical*>(reales[pos])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[pos])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[pos])->getIndice();
                    
                                 }
@@ -267,12 +275,12 @@ int main(){
                         if(opcionU==1){
                             for (int i = 0; i < reales.size(); ++i)//imprime el vector
                             {
-                                 if(typeid(reales[i])==typeid(Racional)){
+                                 if(typeid(*reales[i])==typeid(Racional)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                                      cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
                     
                                  }
-                                if(typeid(reales[i])==typeid(Radical)){
+                                if(typeid(*reales[i])==typeid(Radical)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                                      cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
@@ -283,21 +291,21 @@ int main(){
                                 cout<<"Ingrese posicion del vector:"<<endl;
                                 cin>>pos1;
 
-                                if(typeid(reales[pos1])==typeid(Racional)){
+                                if(typeid(*reales[pos1])==typeid(Racional)){
                                     acumu<< reinterpret_cast<Racional*>(reales[pos])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[pos])->getDenominador();
                 
                                 }
-                                if(typeid(reales[pos1])==typeid(Radical)){
+                                if(typeid(*reales[pos1])==typeid(Radical)){
                                     acumu<< reinterpret_cast<Radical*>(reales[pos])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[pos])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[pos])->getIndice();
                    
                                 }
                                 string resultado;
                                 resultado="";
-                                if(typeid(realRaiz)==typeid(Racional)){
+                                if(typeid(*realRaiz)==typeid(Racional)){
                                     resultado= "=" +  reinterpret_cast<Racional*>(realRaiz)->mult(reales[pos1]);
                                     acumu<<resultado;              
                                  }
-                                if(typeid(realRaiz)==typeid(Radical)){
+                                if(typeid(*realRaiz)==typeid(Radical)){
                                     resultado= "=" +  reinterpret_cast<Radical*>(realRaiz)->mult(reales[pos1]);
                                     acumu<<resultado; 
                                  }
@@ -336,12 +344,12 @@ int main(){
                         if(opcionU==1){
                             for (int i = 0; i < reales.size(); ++i)//imprime el vector
                             {
-                                 if(typeid(reales[i])==typeid(Racional)){
+                                 if(typeid(*reales[i])==typeid(Racional)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                                      cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
                     
                                  }
-                                if(typeid(reales[i])==typeid(Radical)){
+                                if(typeid(*reales[i])==typeid(Radical)){
                                       //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
                                      cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
@@ -352,11 +360,11 @@ int main(){
                                 cout<<"Ingrese posicion del vector:"<<endl;
                                 cin>>pos1;
 
-                                if(typeid(reales[pos1])==typeid(Racional)){
+                                if(typeid(*reales[pos1])==typeid(Racional)){
                                     acumu<< reinterpret_cast<Racional*>(reales[pos])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[pos])->getDenominador();
                 
                                 }
-                                if(typeid(reales[pos1])==typeid(Radical)){
+                                if(typeid(*reales[pos1])==typeid(Radical)){
                                     acumu<< reinterpret_cast<Radical*>(reales[pos])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[pos])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[pos])->getIndice();
                    
                                 }
@@ -394,8 +402,22 @@ int main(){
                 }//division opcionCalcu
 
         }//fin opcion
-
         if(opcion==3){
+            for (int i = 0; i < reales.size(); ++i)//imprime el vector
+            {
+                  if(typeid(*reales[i])==typeid(Racional)){
+                      //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                      cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
+                      
+                   }
+                   if(typeid(*reales[i])==typeid(Radical)){
+                        //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                         cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
+                    
+                    }
+        }
+        }
+        if(opcion==4){
                 ofstream archivo;
                 string ruta="Nombre.txt";
                 stringstream ss;

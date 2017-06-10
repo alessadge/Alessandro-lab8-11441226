@@ -34,7 +34,7 @@ string Radical::suma(Real*num){
 	int numeradorTemp, denominadorTemp, coeficienteTemp, radicandoTemp;
 	string retValue="";
 	stringstream temp1, temp2, temp3;
-	if(typeid(num)==typeid(Racional)){
+	if(typeid(*num)==typeid(Racional)){
 		Racional* racional = dynamic_cast<Racional*>(num);
 		denominadorTemp=racional->getDenominador();
 		coeficienteTemp=denominadorTemp*coeficiente;
@@ -43,7 +43,7 @@ string Radical::suma(Real*num){
 			"/" << denominadorTemp;
 		retValue= temp1.str();
 	}
-	if(typeid(num)==typeid(Radical)){
+	if(typeid(*num)==typeid(Radical)){
 		Radical* racional = dynamic_cast<Radical*>(num);
 		if(indice==racional->getIndice()&&radicando==racional->getRadicando()){
 			temp1<<coeficiente+racional->getCoeficiente()<<"("<<
