@@ -47,17 +47,20 @@ string Radical::suma(Real*num){
 		Radical* racional = dynamic_cast<Radical*>(num);
 		if(indice==racional->getIndice()&&radicando==racional->getRadicando()){
 			temp1<<coeficiente+racional->getCoeficiente()<<"("<<
-				racional->getRadicando<<")^(1/"<<indice<<")";
+				racional->getRadicando()<<")^(1/"<<indice<<")";
 		}else{
 			temp1<<coeficiente<<"("<<radicando<<")^(1/"<<indice<<") + "
-				<<racional->getCoeficiente()<<"("<racional->getRadicando()<<
-				")^(1/"<<racional->getIndice()<<")";
+				<<racional->getCoeficiente()<<"("<<racional->getRadicando();
+				temp1<<")^(1/"<<racional->getIndice()<<")";
 		}
 		retValue=temp1.str();
 	}
 	return retValue;
 }
 string Radical::resta(Real*num){
+	int numeradorTemp, denominadorTemp, coeficienteTemp, radicandoTemp;
+	string retValue="";
+	stringstream temp1, temp2, temp3;
 	if(typeid(num)==typeid(Racional)){
 		Racional* racional = dynamic_cast<Racional*>(num);
 		
@@ -72,10 +75,12 @@ string Radical::resta(Real*num){
 		Radical* racional = dynamic_cast<Radical*>(num);
 		if(indice==racional->getIndice()&&radicando==racional->getRadicando()){
 			temp1<<coeficiente-racional->getCoeficiente()<<"("<<
-				racional->getRadicando<<")^(1/"<<indice<<")";
+				racional->getRadicando();
+				temp1<<")^(1/"<<indice<<")";
 		}else{
 			temp1<<coeficiente<<"("<<radicando<<")^(1/"<<indice<<") - "
-				<<racional->getCoeficiente()<<"("<racional->getRadicando()<<
+				<<racional->getCoeficiente()<<"("<<racional->getRadicando();
+				temp1<<
 				")^(1/"<<racional->getIndice()<<")";
 		}
 		retValue=temp1.str();
@@ -128,8 +133,8 @@ string Radical::div(Real*num){
 	if(typeid(num)==typeid(Radical)){
 		Radical* radical = dynamic_cast<Radical*>(num);
 		temp2<< coeficiente << "(" << radicando << ")^(1/"<<indice<<")/"
-			<< radical->getCoeficiente()<<"("<<radical->getRadicando()<<
-			")^(1/"<<radical->getIndice<<")";
+			<< radical->getCoeficiente()<<"("<<radical->getRadicando();
+			temp1<<")^(1/"<<radical->getIndice()<<")";
 		retValue= temp2.str();
 	}
 	return retValue;
