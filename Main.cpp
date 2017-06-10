@@ -184,7 +184,17 @@ int main(){
                         string resultado;
                         string resultadoFinal;
                         resultadoFinal= "=";
-                        //resultado = realRaiz + numero;
+                        if(typeid(*realRaiz)==typeid(Racional)){
+                              resultado = *(reinterpret_cast<Racional*>(realRaiz)) + numero;  
+                                     
+                    
+                                 }
+                        if(typeid(*realRaiz)==typeid(Radical)){
+                              resultado = *(reinterpret_cast<Radical*>(realRaiz)) + numero;   
+                                    
+        
+                                 }
+                        
                           
                         resultadoFinal=resultadoFinal+resultado;
                         acumu<<resultadoFinal;
@@ -254,7 +264,16 @@ int main(){
                         string resultado;
                         string resultadoFinal;
                         resultadoFinal= "=";
-                        //resultado = realRaiz - numero;
+                        if(typeid(*realRaiz)==typeid(Racional)){
+                              resultado = *(reinterpret_cast<Racional*>(realRaiz)) - numero;  
+                                     
+                    
+                                 }
+                        if(typeid(*realRaiz)==typeid(Radical)){
+                              resultado = *(reinterpret_cast<Radical*>(realRaiz)) - numero;   
+                                    
+        
+                                 }
                           
                         resultadoFinal=resultadoFinal+resultado;
                         acumu<<resultadoFinal;
@@ -323,7 +342,16 @@ int main(){
                         string resultado;
                         string resultadoFinal;
                         resultadoFinal= "=";
-                        //resultado = realRaiz * numero;
+                        if(typeid(*realRaiz)==typeid(Racional)){
+                              resultado = *(reinterpret_cast<Racional*>(realRaiz)) * numero;  
+                                     
+                    
+                                 }
+                        if(typeid(*realRaiz)==typeid(Radical)){
+                              resultado = *(reinterpret_cast<Radical*>(realRaiz)) * numero;   
+                                    
+        
+                                 }
                           
                         resultadoFinal=resultadoFinal+resultado;
                         acumu<<resultadoFinal;
@@ -392,7 +420,16 @@ int main(){
                         string resultado;
                         string resultadoFinal;
                         resultadoFinal= "=";
-                        //resultado = realRaiz / numero;
+                        if(typeid(*realRaiz)==typeid(Racional)){
+                              resultado = *(reinterpret_cast<Racional*>(realRaiz)) / numero;  
+                                     
+                    
+                                 }
+                        if(typeid(*realRaiz)==typeid(Radical)){
+                              resultado = *(reinterpret_cast<Radical*>(realRaiz)) / numero;   
+                                    
+        
+                                 }
                           
                         resultadoFinal=resultadoFinal+resultado;
                         acumu<<resultadoFinal;
@@ -406,12 +443,12 @@ int main(){
             for (int i = 0; i < reales.size(); ++i)//imprime el vector
             {
                   if(typeid(*reales[i])==typeid(Racional)){
-                      //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                      cout<<reinterpret_cast<Racional*>(reales[i])<<endl;
                       cout<<i<<".) "<<reinterpret_cast<Racional*>(reales[i])->getNumerador()<<"/"<<reinterpret_cast<Racional*>(reales[i])->getDenominador()<<endl;
                       
                    }
                    if(typeid(*reales[i])==typeid(Radical)){
-                        //acumulador+= reales[i]->getNumerador()+"/"+reales[i]->getDenominador()
+                        cout<<reinterpret_cast<Radical*>(reales[i])<<endl;
                          cout<<i<<".) "<<reinterpret_cast<Radical*>(reales[i])->getCoeficiente()<<"("<<reinterpret_cast<Radical*>(reales[i])->getRadicando()<<")"<<"^1/"<<reinterpret_cast<Radical*>(reales[i])->getIndice()<<endl;
                     
                     }
